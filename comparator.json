@@ -1,0 +1,14 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "WrittenOnTheWallII.GraphConjecture61.conjecture61",
+    "WrittenOnTheWallII.GraphConjecture61.induced_matching_residue"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

@@ -1,0 +1,163 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Written on the Wall II Conjecture 61: Induced Forest, Residue, and Diameter Bound in Lean 4"
+  description: >-
+    A Lean 4 / Mathlib formalization proving Written on the Wall II Conjecture 61:
+    for every nontrivial finite connected simple graph G, the maximum order f(G) of an
+    induced forest satisfies f(G) ≥ residue(G) + ⌈diam(G) / 3⌉, where residue(G) is
+    the Havel-Hakimi residue and diam(G) is the graph diameter. The proof establishes
+    positive maximum-degree vertex-deletion monotonicity for Havel-Hakimi residue from
+    first principles via degree-sequence exchanges and Havel-Hakimi graphicality,
+    proves a matching-residue theorem yielding the general Induced-Matching Residue
+    Inequality R(G) ≤ max(α(G - A), α(G - B)) for every induced matching A ↔ B in any
+    finite simple graph G, applies it to ⌈diam(G) / 3⌉ edges along a diametral geodesic
+    whose sides are 3-packings, and lifts the bound to the exact real-valued statement
+    in google-deepmind/formal-conjectures using only the three standard Lean axioms.
+  authors:
+    - "Josh Hurst"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Josh Hurst"
+
+classification:
+  arxiv: ["math.CO"]
+  msc2020: ["05C07", "05C12", "05C69", "05C70", "05C05"]
+
+sources:
+  - title: "Written on the Wall II: Conjectures of Graffiti.pc, Conjecture 61"
+    authors:
+      - "Ermelinda DeLaViña"
+    id: "WOWII-61"
+    type: "other"
+    location: "https://web.archive.org/web/20260723161800id_/http://cms.uhd.edu/faculty/delavinae/research/wowII/all.html"
+    relationship: "formalizes"
+    note: >-
+      Conjecture 61 (25 March 2004, listed as open in the archived WOWII table)
+      asserts f(G) ≥ R(G) + ⌈D(G)/3⌉ for finite connected graphs, where f is the
+      largest induced forest order, R is the Havel-Hakimi residue, and D is the
+      diameter. This repository proves the conjecture in full generality via a
+      short matching-residue induction establishing R(G) ≤ max(α(G - A), α(G - B))
+      for every induced matching (A, B).
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "On the residue of a graph"
+    authors:
+      - "O. Favaron"
+      - "M. Mahéo"
+      - "J.-F. Saclé"
+    id: "doi:10.1002/jgt.3190150107"
+    type: "paper"
+    location: "https://doi.org/10.1002/jgt.3190150107"
+    relationship: "background"
+    note: >-
+      Introduces the Havel-Hakimi residue R(G) and proves R(G) ≤ α(G), which appears
+      as the empty-matching case (k = 0) of the Induced-Matching Residue Inequality
+      proved here.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "Independence and the Havel-Hakimi residue"
+    authors:
+      - "Jerrold R. Griggs"
+      - "Daniel J. Kleitman"
+    id: "doi:10.1016/0012-365X(92)00479-B"
+    type: "paper"
+    location: "https://doi.org/10.1016/0012-365X(92)00479-B"
+    relationship: "background"
+    note: >-
+      Gives the Maxine bound R(G) ≤ α(G) via maximum-degree deletion; this
+      formalization proves the underlying degree-sequence exchange monotonicity and
+      positive maximum-degree residue deletion theorem from first principles in Lean 4.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "https://github.com/google-deepmind/formal-conjectures/blob/9097e2f90e66d2f6244209cb1c07f7120d17ec53/FormalConjectures/WrittenOnTheWallII/GraphConjecture61.lean"
+    relationship: "builds-on"
+    note: >-
+      The theorem signature WrittenOnTheWallII.GraphConjecture61.conjecture61 and the
+      defining equations for SimpleGraph.havelHakimiStep, SimpleGraph.residueAux,
+      SimpleGraph.residue, and SimpleGraph.largestInducedForestSize follow commit
+      9097e2f90e66d2f6244209cb1c07f7120d17ec53 (adapting only the list-length and
+      termination proof terms for import-independent Lean 4.35.0-rc2 compatibility).
+
+status:
+  scope: >-
+    Proves both compared declarations in full without sorry, native_decide, or custom
+    axioms: WrittenOnTheWallII.GraphConjecture61.conjecture61 (exact upstream
+    statement for all nontrivial finite connected simple graphs) and
+    WrittenOnTheWallII.GraphConjecture61.induced_matching_residue (R(G) ≤
+    max(α(G - A), α(G - B)) for every induced matching in any finite simple graph).
+    WOWII61.natForestBound additionally covers the trivial singleton graph (n = 1).
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["gpt-6.2-astra", "gemini-4-neon"]
+      framework: "T3 Code"
+      tool_setup: >-
+        AI-assisted proof discovery and Lean 4 formalization directed by Josh Hurst.
+      cost:
+        wall_time: "completed on 2026-11-25/26"
+        spend_usd: "subscription-based"
+        hardware: "Apple Silicon Mac and GitHub Actions"
+      prompting_notes: >-
+        Human selected the target conjecture, set formal verification and zero-axiom
+        requirements, audited source fidelity and provenance, and directed packaging.
+  spend_usd: "subscription-based"
+  notes: >-
+    Mathematical proof discovery and Lean 4 formalization were AI-assisted under
+    human direction and verified mechanically by Lean's kernel, leanchecker --fresh,
+    and Palomar Comparator (Lean, NanoDa, and con-ron).
+
+fidelity:
+  divergences: >-
+    The compared theorem type WrittenOnTheWallII.GraphConjecture61.conjecture61 and
+    the defining equations of SimpleGraph.havelHakimiStep, SimpleGraph.residueAux,
+    SimpleGraph.residue, and SimpleGraph.largestInducedForestSize match
+    google-deepmind/formal-conjectures commit 9097e2f90e66d2f6244209cb1c07f7120d17ec53.
+    Only the internal proof terms for havelHakimiStep_length_cons and residueAux
+    termination were adapted to import-independent core-Lean proofs so Challenge.lean
+    and WOWII61/Defs.lean agree identically under Lean 4.35.0-rc2 with
+    definition_names: []. Relative to DeLaViña's 2004 wording, the upstream statement
+    includes [Nontrivial α] (n ≥ 2); the singleton case (n = 1, R = 1, D = 0, f = 1)
+    is also proved in WOWII61.natForestBound.
+
+review:
+  status: "agent-reviewed"
+  reviewers:
+    - "Josh Hurst (oversight and provenance audit)"
+    - "Automated independent proof and verification checks"
+  notes: >-
+    The proof and formalization were checked by automated review and verified
+    mechanically with -DwarningAsError=true, leanchecker --fresh, and Palomar
+    Comparator with Lean, NanoDa, and con-ron. No human domain-expert mathematical
+    referee has reviewed the repository.
+
+alignment:
+  namespace: "WrittenOnTheWallII.GraphConjecture61"
+  statements:
+    - source: "Written on the Wall II Conjecture 61 (E. DeLaViña, 25 March 2004)"
+      lean: "WrittenOnTheWallII.GraphConjecture61.conjecture61"
+      module: "Solution"
+      status: "proved"
+      note: >-
+        Exact signature from FormalConjectures/WrittenOnTheWallII/GraphConjecture61.lean
+        at commit 9097e2f90e66d2f6244209cb1c07f7120d17ec53; proved unconditionally using
+        only [propext, Classical.choice, Quot.sound].
+    - source: "Induced-Matching Residue Inequality R(G) ≤ max(α(G - A), α(G - B))"
+      lean: "WrittenOnTheWallII.GraphConjecture61.induced_matching_residue"
+      module: "Solution"
+      status: "proved"
+      note: >-
+        Generalizes Favaron-Mahéo-Saclé (1991) to arbitrary induced matchings in any
+        finite simple graph and immediately implies WOWII Conjecture 61 along a
+        diametral geodesic.
+
+acknowledgements: >-
+  Built on Lean 4, Mathlib, the PalomarTemplate starter repository, and invariant
+  definitions from Google DeepMind's Formal Conjectures repository.
